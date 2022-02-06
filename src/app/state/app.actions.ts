@@ -7,7 +7,7 @@ export const ACTION_INICIAR_TAREFA = '[APP] INICIAR TAREFA';
 
 
 export class CriarTarefa implements Action {
-  readonly type = ACTION_INICIAR_TAREFA;
+  readonly type = ACTION_NOVA_TAREFA;
 
   constructor(public payload?: Task) {}
 }
