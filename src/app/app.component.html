@@ -8,8 +8,8 @@
 
   <div class="nova-tarefa m-4">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Descrição da tarefa" aria-label="Descrição da tarefa" aria-describedby="button-addon2">
-      <button class="btn btn-primary" type="button">Criar tarefa</button>
+      <input #nomeTarefa type="text" class="form-control" placeholder="Descrição da tarefa" aria-label="Descrição da tarefa" aria-describedby="button-addon2">
+      <button (click)="criarTarefa(nomeTarefa.value)" class="btn btn-primary" type="button">Criar tarefa</button>
     </div>
 
   </div>
@@ -19,10 +19,12 @@
         A Fazer
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          An item
-          <button type="button" class="btn btn-outline-primary">Iniciar</button>
-        </li>
+        <ng-container *ngFor="let task of tasks$ | async">
+          <li *ngIf="task.status === 'TODO'" class="list-group-item d-flex justify-content-between align-items-center" >
+            {{task.nome}}
+            <button (click)="iniciarTarefa(task)" type="button" class="btn btn-outline-primary">Iniciar</button>
+          </li>
+        </ng-container>
       </ul>
     </div>
 
@@ -31,10 +33,12 @@
         Executando
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Another item
-          <button type="button" class="btn btn-outline-success">Finalizar</button>
-        </li>
+        <ng-container *ngFor="let task of tasks$ | async">
+          <li *ngIf="task.status === 'DOING'" class="list-group-item d-flex justify-content-between align-items-center">
+            Another item
+            <button type="button" class="btn btn-outline-success">Finalizar</button>
+          </li>
+        </ng-container>
       </ul>
     </div>
 
